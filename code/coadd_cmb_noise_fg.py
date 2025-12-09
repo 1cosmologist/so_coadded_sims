@@ -141,7 +141,7 @@ def alms_to_map(alms, nside):
     """
     alms_array = np.array(alms)
     alms_array[2] *= np.sqrt(Alens)  # Scale B-mode alms by sqrt(Alens)
-    maps = hp.alm2map(alms_array, nside)
+    maps = hp.alm2map(alms_array, nside, pol=True)
     return maps
 
 
@@ -266,6 +266,7 @@ def process_simulation(sim_idx, instr_params, output_subdir, mask, output_dir):
         # Get beam FWHM and compute beam window function
         fwhm_arcmin = params['beam_fwhm_arcmin']
         nside = params['nside']
+        freq = params['central_freq_GHz']
         
         beam_fl = get_gaussian_beam_fl(fwhm_arcmin, lmax)
         
@@ -290,12 +291,15 @@ def process_simulation(sim_idx, instr_params, output_subdir, mask, output_dir):
             f"sobs_coadd_{channel}_AL{Alens:.2f}_mc{sim_idx:03d}_nside{nside:04d}.fits"
         )
         
-        header = {
-            'SIMIDX': sim_idx,
-            'CHANNEL': channel,
-            'FWHM_ARCMIN': fwhm_arcmin,
-            'ALENS': Alens
-        }
+        header = [
+                ('UNITS', 'uK_CMB', 'Map units'),
+                ('CHANNEL', channel, 'Channel name'),
+                ('FREQ', freq, 'Frequency in GHz'),
+                ('BEAM', fwhm_arcmin, 'Beam FWHM in arcmin'),
+                ('SIMIDX', sim_idx, 'Simulation index'),
+                ('ALENS', Alens, 'Lensing amplitude scaling factor')
+            ]
+        
         hp.write_map(output_path, coadded_map, overwrite=True, dtype=np.float32, extra_header=header)
         print(f"    Saved: {output_path}")
 
