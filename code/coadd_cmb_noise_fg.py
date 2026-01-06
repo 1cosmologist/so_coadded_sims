@@ -19,7 +19,7 @@ from tqdm import tqdm
 # =============================================================================
 # ROOT PATH CONFIGURATION
 # =============================================================================
-Alens = 0.5
+Alens = 0.3
 NSIMS = 100  # Number of simulations
 fgcomplexity = "gaussian"  # Foreground complexity
 # Root path for CMB alms
@@ -35,7 +35,7 @@ FOREGROUND_MAP_ROOT = f"/pscratch/sd/s/shamikg/so_gaussian_fg/output/foreground_
 MASK_ROOT = "/pscratch/sd/s/shamikg/so_mapbased_noise/resources"
 
 # YAML file with instrument parameters
-YAML_FILE = "/pscratch/sd/s/shamikg/so_coadded_sims/resources/instr_params_baselineEHF_pessimistic.yaml"
+YAML_FILE = "/pscratch/sd/s/shamikg/so_coadded_sims/resources/instr_params_baseline2UHF_pessimistic.yaml"
 
 # Output directory for coadded maps
 OUTPUT_DIR = "/pscratch/sd/s/shamikg/so_coadded_sims/output"
