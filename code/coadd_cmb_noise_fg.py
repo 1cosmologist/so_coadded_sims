@@ -19,7 +19,7 @@ from tqdm import tqdm
 # =============================================================================
 # ROOT PATH CONFIGURATION
 # =============================================================================
-Alens = 0.3
+Alens = 0.5
 NSIMS = 100  # Number of simulations
 fgcomplexity = "gaussian"  # Foreground complexity
 # Root path for CMB alms
@@ -29,10 +29,13 @@ CMB_ALM_ROOT = "/global/cfs/cdirs/sobs/v4_sims/mbs/cmb"
 NOISE_MAP_ROOT = "/pscratch/sd/s/shamikg/so_mapbased_noise/output"
 
 # Root path for foreground maps
-FOREGROUND_MAP_ROOT = f"/pscratch/sd/s/shamikg/so_gaussian_fg/output/foreground_sims/{fgcomplexity}_fg"
+FOREGROUND_MAP_ROOT = f"/pscratch/sd/s/shamikg/so_gaussian_fg/output/foreground_sims/{fgcomplexity}_fg_EHF"
 
 # Root path for mask files
 MASK_ROOT = "/pscratch/sd/s/shamikg/so_mapbased_noise/resources"
+
+# YAML file with instrument parameters
+YAML_FILE = "/pscratch/sd/s/shamikg/so_coadded_sims/resources/instr_params_baselineEHF_pessimistic.yaml"
 
 # Output directory for coadded maps
 OUTPUT_DIR = "/pscratch/sd/s/shamikg/so_coadded_sims/output"
@@ -308,7 +311,7 @@ def main():
     """Main function to run the coadding pipeline."""
     
     # Paths
-    yaml_path = "/pscratch/sd/s/shamikg/so_coadded_sims/resources/instr_params_baseline_pessimistic.yaml"
+    yaml_path = YAML_FILE
     mask_path = os.path.join(MASK_ROOT, "so_sat_full-binary_C_nside512.fits")
     output_dir = OUTPUT_DIR
     
